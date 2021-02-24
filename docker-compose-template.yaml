@@ -1,0 +1,19 @@
+version: '3.1'
+networks:
+  dev_postgresql:
+    external: false
+
+services:
+  db-server:
+    container_name: dev_postgresql
+    image: postgres:13.2
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+    networks:
+      - dev_postgresql
+    volumes:
+      - <path-to-data-dir>:/var/lib/postgresql/data
+      - <path-to-scripts-dir>:/opt/postgresql/scripts
